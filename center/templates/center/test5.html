@@ -1,0 +1,1009 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link href="{% static 'css/onsite.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <script src="{% static 'js/test.js' %}"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!-- icon -->
+    <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+     <script type="text/javascript">
+
+    </script>
+
+
+
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 350px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+       body {
+           background-image: linear-gradient(to right bottom, rgba(255,0,0,0), 	rgb(134, 121, 121));
+       }
+       .slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+    </style>
+<style>
+.btn1 {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn1:hover {
+  background-color: RoyalBlue;
+}
+.switch {
+    width: 100px;
+    height: 10px;
+    position: relative;
+}
+.switch label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #a5a39d;
+    border-radius: 40px;
+    box-shadow:
+        inset 0 3px 8px 1px rgba(0,0,0,0.2),
+        0 1px 0 rgba(255,255,255,0.5);
+}
+.switch label:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -8px; right: -8px; bottom: -8px; left: -8px;
+    border-radius: inherit;
+    background: #ccc; /* Fallback */
+    background: linear-gradient(#f2f2f2, #ababab);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3),
+        0 1px 1px rgba(0,0,0,0.25);
+}
+.switch label:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -18px; right: -18px; bottom: -18px; left: -18px;
+    border-radius: inherit;
+    background: #eee; /* Fallback */
+    background: linear-gradient(#e5e7e6, #eee);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    -webkit-filter: blur(1px); /* Smooth trick */
+    filter: blur(1px); /* Future-proof */
+}
+.switch label i {
+    display: block;
+    height: 100%;
+    width: 60%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    border-radius: inherit;
+    background: #b2ac9e; /* Fallback */
+    background: linear-gradient(#f7f2f6, #b2ac9e);
+    box-shadow:
+        inset 0 1px 0 white,
+        0 0 8px rgba(0,0,0,0.3),
+        0 5px 5px rgba(0,0,0,0.2);
+}
+.switch label i:after {
+    content: "";
+    position: absolute;
+    left: 15%;
+    top: 25%;
+    width: 70%;
+    height: 50%;
+    background: #d2cbc3; /* Fallback */
+    background: linear-gradient(#cbc7bc, #d2cbc3);
+    border-radius: inherit;
+}
+.switch label i:before {
+    content: "off";
+    position: absolute;
+    top: 50%;
+    right: -50%;
+    margin-top: -12px;
+    color: #666; /* Fallback */
+    color: rgba(0,0,0,0.4);
+    font-style: normal;
+    font-weight: bold;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+}
+.switch input:checked ~ label { /* Background */
+    background: #9abb82;
+}
+
+.switch input:checked ~ label i { /* Toggle */
+    left: auto;
+    right: -1%;
+}
+
+.switch input:checked ~ label i:before { /* On/off */
+    content: "on";
+    right: 115%;
+    color: #82a06a;
+    text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
+}
+</style>
+    <title>Document</title>
+
+
+</head>
+<body>
+
+    <div id="mySidenav" class="sidenav" style="width:250px;">
+       <button href="javascript:void(0)" class="closebtn" onclick="closeNav()" font>&times; Close</button>
+
+       <a class="navbar-brand" href="#" >
+           <center>
+          <img src="{% static 'images/loginavatar.png' %}" style="max-height:80px"> {{ user.first_name }}
+          </center>
+
+        </a>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <hr class="style2">
+      <a class="btn btn-info btn-lg" href="https://doctorcityvn.pythonanywhere.com/menu/" style="text-align:left;background: linear-gradient(to bottom, #6600ff 0%, #cc99ff 80%);"><i class="fa fa-fw fa-home"></i> Home</a>
+
+      <a class="btn btn-info btn-lg" href="https://doctorcityvn.pythonanywhere.com/about/" style="margin-top:20px; text-align:left;background:  linear-gradient(to top, #4d4d00 15%, #ffffff 100%);"><img src="{% static 'images/about.jpg' %}" class="img-fluid" alt="Responsive image" style="max-height:20px"> About</a>
+
+
+
+     <hr class="style2">
+      <a href="{% url 'logout' %}" class="btn btn-info btn-lg" style="margin-top:20px; text-align:left;background: linear-gradient(to bottom, #6600ff 0%, #cc99ff 80%);">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+
+
+    </div>
+
+
+    <div class="container">
+
+      <div  class="row" style="background:  #a3a3c2;">
+
+        <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        <a class="btn btn-primary ml-auto" id="call0" href="tel:0981919115" style="margin-left: 5px; padding:3px;background-color:rgb(255, 92, 51);position: absolute; right: 0;">
+                            <b></script>Call emergency </b></script><span class="glyphicon glyphicon-earphone" style="padding-left:1px; padding-right:1px;"></span>
+                        </a>
+
+
+                    <b>
+
+
+                    <button id="mothongtin"  class="btn btn-danger btn-md" style="background: linear-gradient(to bottom, #6600ff 0%, #cc99ff 80%);">
+  <div style="max-height:40px;"><i class="fa fa-address-book"></i></div><div style="text-indent: -10px;">Thông</div><div style="margin-left: 0px;">tin</div></button>
+<button id="mobenhsu"  class="btn btn-primary btn-md" style=" background:  linear-gradient(to top, #4d4d00 15%, #ffffff 100%);">
+  <div style="max-height:40px;"><i class="fa fa-book-open"></i></div><div style="text-indent: -5px;">Bệnh</div><div style="text-indent: -5px;">sử</div></button>
+
+<button id="motrieuchung"  class="btn btn-danger btn-md" style=" background:  linear-gradient(to top, #336699 15%, #ffffff 100%);">
+  <div style="max-height:40px;"><i class="fa fa-heartbeat"></i></div><div style="text-indent: -7px;">Triệu</div><div style="text-indent: -7px;">chứng</div></button>
+
+
+<button id="moxuly"  class="btn btn-primary btn-md" style=" background:  linear-gradient(to top, #4d4d00 15%, #ffffff 100%);">
+  <div style="max-height:40px;"><i class="fa fa-ambulance"></i></div><div style="text-indent: -7px;">Xử</div><div style="text-indent: -7px;">lý</div></button>
+
+
+
+<button id="modichvu"  class="btn btn-danger btn-md" style=" background:  linear-gradient(to top, #336699 15%, #ffffff 100%);">
+  <div style="max-height:40px;"><i class="fa fa-hospital"></i></div><div style="text-indent: -5px;">Dịch</div><div style="text-aling: -7px;">vụ</div></button>
+
+
+<button id="modonthuoc"  class="btn btn-primary btn-md" style=" background:  linear-gradient(to top, #4d4d00 15%, #ffffff 100%);">
+  <div style="max-height:40px;"><i class="fa fa-plus-square"></i></div><div style="text-indent: -5px;">Đơn</div><div style="text-indent: -7px;">thuốc</div></button>
+<button id="mochat"  class="btn btn-danger btn-md" style="background: linear-gradient(to bottom, #6600ff 0%, #cc99ff 80%);">
+  <div style="max-height:40px;"><i class="fa fa-comments"></i></div><br/><div style="text-indent: -7px; ">Chat</div></button>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div  class="row">
+
+            <button class="form-control form-control-sm" id="myBtn" style="margin-top:5px; background:  linear-gradient(to top, #4d4d00 1%, #ffffff 100%);">Back to home</button>
+              <div class="grad1" id="pan1" >
+
+
+                <div class="panel-body" style="max-height: 750px;">
+
+
+
+                <div class="col-xs-8" style="margin-bottom: 10px;">
+
+                <input type="checkbox" id="toggle-event" checked data-toggle="toggle" data-size="normal" data-offstyle="warning" data-width="100"  data-off="Not Ready"  data-on="Tiếp nhận">
+                </div>
+                 <script>
+
+                  $(function() {
+                    $('#toggle-event').change(function() {
+                       if ($("#toggle-event").is(":checked")){
+                        setTimeout(myhide,500);
+
+                    }})
+
+                  })
+                    function myhide() {
+                       $("#pantiepnhan1").show();
+                                            $("#pan1").hide();
+                                            $("#myBtn").show();
+
+                    }
+
+                </script>
+
+
+
+
+
+
+                    <div id="map" style="border-style: solid;"></div>
+                    <br/>
+
+                    <div class="col-xs-8"></div>
+                <div class="col-xs-4">
+
+
+
+
+
+                        </div>
+
+                    <center><button type="button" class="btn btn-info  btn-md" id="tiepnhan" style="margin-top: 10px;width: 250px;"><b>Tiếp nhận</b></button></center>
+                    <center><button type="button" class="btn btn-info  btn-md" id="mohosokham" style="margin-top: 10px;width: 250px;"><b>Mở hồ sơ khám</b></button></center>
+                    <center><button type="button" class="btn btn-info  btn-md" id="hoanthienhoso" style="margin-top: 10px;width: 250px;"><b>Hoàn thiện hồ sơ khám</b></button></center>
+
+                </div>
+            </div>
+            <div class="panel panel-default" id="pan2">
+
+                <div class="panel-body" style="background-color: #778899 ;">
+                    <button h1 type="button" class="btn">Bệnh sử (Diễn biến bệnh hiện tại)</button>
+                    <br/>
+                    <br/>
+
+
+
+                      <textarea rows="3" id="benhsu"  style="width:100%"></textarea>
+
+
+
+                    <button type="button" class="btn" style="margin-top: 25px;">Khám bệnh</button>
+                    <br/>
+                    <br/>
+
+                    <input type="text" class="b1"  id="dauhieusinhton" placeholder="Dấu hiệu sinh tồn">
+                    <input type="text" id="dauhieusinhton" placeholder="Triệu chứng toàn thần ">
+                    <input type="text" id="dauhieusinhton" placeholder="Triệu chứng tuần hoàn">
+                    <input type="text" id="dauhieusinhton" placeholder="Hô hấp">
+                    <input type="text" id="dauhieusinhton" placeholder="Tiêu hóa">
+                    <input type="text" id="dauhieusinhton" placeholder="Tiết niệu sinh dục">
+                    <input type="text" id="dauhieusinhton" placeholder="Tâm thần kinh">
+                    <input type="text" id="dauhieusinhton" placeholder="Cơ xương khớp">
+                    <input type="text" id="dauhieusinhton" placeholder="Cơ quan khác">
+                    <br/>
+                    <br/>
+                    <button type="button" class="btn">Kết quả cận lâm sàng</button>
+                    <br/>
+                    <br/>
+
+                    <textarea rows="3" id="ketquacanlamsang" placeholder="Enter text" style="width:100%"></textarea>
+
+                    <br/>
+                    <br/>
+
+                    <button type="button" class="btn">Chẩn đoán</button>
+                    <br/>
+                    <br/>
+                    <textarea rows="3" id="chandoan" placeholder="Enter text" style="width:100%"></textarea>
+                    <br/>
+                    <br/>
+                    <button type="button" class="btn">Xử lý</button>
+                    <br/>
+                    <br/>
+
+                    <input type="text" id="dauhieusinhton" placeholder="Item text">
+                    <br/>
+                    <br/>
+
+                    <center><button type="button"  class="btn btn-warning" id="luuthongtin">Lưu thông tin</button></center>
+                    <center><button type="button"  id="back1" style="background:powderblue; margin-top: 15px;padding:6px;" ><h6>Back Home<h6></button></center>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="panel panel-default" id="pantiepnhan1">
+
+                <div class="panel-body" style="background: linear-gradient(linear-gradient(to top right, #9933ff 8%, #ff99cc 100%);; max-height: 750px; height: 750px;">
+                 <br/>
+
+
+                    <form action="/staff/" method="get">
+
+                        <table class="table" id="table1">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><lable for "typeid">Phòng ID:</lable></td>
+                                            <td>
+                                                <select name="phongidstaff">
+                                                {% for entry in namediv_list %}
+                                                 <option value="{{ entry.id }}">{{ entry.namediv }}</option>
+                                                {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><lable for "hotenstaff">Họ tên:</lable></td>
+                                            <td><input  class="form-control form-control-sm" type="text" name="hotenstaff" value="Nguyễn Thị Hằng"></td>
+                                        </tr>
+
+                                            <td><lable for "tuoistaff">Tuổi:</lable></td>
+                                            <td><input  class="form-control form-control-sm" type="text" name="tuoistaff" value="43"></td>
+
+                                        <tr>
+                                            <td><lable for "diachistaff">Địa chỉ:</lable></td>
+                                            <td><input  class="form-control form-control-sm" type="text" name="diachistaff" value="41 Thanh Xuân Bắc"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><lable for "thanhphostaff">T.phố:</lable></td>
+                                            <td>
+                                            <select class="selectpicker" data-live-search="true" name="thanhphostaff">
+                                              <option data-tokens="ketchup mustard">Hà Nội</option>
+                                              <option data-tokens="mustard">Hà Nam</option>
+                                              <option data-tokens="frosting">Bắc Giang</option>
+                                              <option data-tokens="frosting">Hải Phòng</option>
+                                              <option data-tokens="frosting">Nam Định</option>
+                                              <option data-tokens="frosting">Ninh Bình</option>
+                                              <option data-tokens="frosting">Tp. Hồ Chí Minh</option>
+                                              <option data-tokens="frosting">Qui Nhơn</option>
+                                              <option data-tokens="frosting">Đà Nẵng</option>
+
+                                            </select>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td><lable for "tendichvu">Tên dịch vụ:</lable></td>
+                                            <td><input  class="form-control form-control-sm" type="text" name="tendichvu" value="cấp cứu khẩn cấp"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><lable for "chatluong">Chất lượng:</lable></td>
+                                            <td><input  class="form-control form-control-sm" type="text" name="chatluong" value="hạng 5"></td>
+                                        </tr>
+                                    </tbody>
+                            </table>
+
+
+
+                    </form>
+                    <div class="col-xs-7">
+                    <input type="button"  onclick="myFunction()" class="btn btn-info" value="Từ chối" id="tuchoi">
+                    </div>
+                    <div class="col-xs-5">
+                    <button class="btn btn-info" id="chapnhantiepnhanbenhnhan" >Chấp nhận</button>
+                    </div>
+                    </br>
+
+
+
+                </div>
+                <script>
+
+                    function myFunction() {
+                      window.open("http://doctorcityvn.pythonanywhere.com/test/","_self");
+                    }
+
+
+
+                </script>
+                <center><button type="button"  id="back9" style="background:powderblue; margin-top: 15px;padding:4px;" ><h6>Back Home<h6></button></center>
+                </div>
+
+            </div>
+
+            <div class="panel panel-default" id="panbenhsu" >
+
+                        <div class="panel-body" style="background:  linear-gradient(to top, #336699 15%, #ffffff 100%);max-height: 750px; height: 750px;">
+                            <div class="col col-xs-4">
+                            <button id="moback" class="w3-button w3-black"><img src="{% static 'images/left.png' %}" style="max-height:28px">Back</button>
+                            </div>
+                            <div class="col col-xs-4">
+                            <button id="moforward" class="w3-button w3-black"><img src="{% static 'images/pause.png' %}" style="max-height:28px">Home</button>
+                            </div>
+                            <div class="col">
+
+                            <button id="mohome" class="w3-button w3-black"><img src="{% static 'images/right.png' %}" style="max-height:28px;max-width:28px">Forward</button>
+                            </div>
+                            <br/>
+                            <textarea readonly class="form-control" rows="3" id="thongtinbenhsu" placeholder="Bệnh sử (diễn biến bệnh đã mắc) "></textarea>
+
+
+                            <center><button type="button"  id="back3" style="background:powderblue; margin-top: 300px;padding:6px;" ><h6>Back Home<h6></button></center>
+
+                        </div>
+
+
+                </div>
+            <div class="panel panel-default" id="panthongtin" style="height: 750px;">
+                <div class="panel-body" style="background:  linear-gradient(to top, #336699 15%, #ffffff 100%); max-height: 750px; height: 750px;">
+
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModaltthc" id="tthc">Thông tin hành chính</button>
+                    <br/>
+                    <button type="button" class="btn btn-primary btn-block">Thông tin bảo hiểm</button>
+                    <br/>
+
+
+                                <textarea readonly  rows="3" id="thongtinbenhdamac" placeholder="Tiền sử bệnh đã mắc " style="width:100%"></textarea>
+                    <br/>
+                    <br/>
+                                <textarea readonly rows="3" id="thongtinbenhsu" placeholder="Bệnh sử (diễn biến bệnh đã mắc) " style="width:100%"></textarea>
+                                <center><button type="button"  id="back2" style="background:powderblue; margin-top: 100px;padding:6px;" ><h6>Back Home<h6></button></center>
+
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+
+
+            </div>
+            <div class="panel panel-default" id="pantrieuchung" >
+                        <div class="panel-body" style="background:  linear-gradient(to top, #336699 15%, #ffffff 100%); max-height: 750px; height: 750px;">
+                            <div class="col col-xs-4">
+                            <button id="moback" class="w3-button w3-black"><img src="{% static 'images/left.png' %}" style="max-height:28px">Back</button>
+                            </div>
+                            <div class="col col-xs-4">
+                            <button id="moforward" class="w3-button w3-black"><img src="{% static 'images/pause.png' %}" style="max-height:28px">Home</button>
+                            </div>
+                            <div class="col">
+
+                            <button id="mohome" class="w3-button w3-black"><img src="{% static 'images/right.png' %}" style="max-height:28px;max-width:28px">Forward</button>
+                            </div>
+                            <br/>
+                                    <table class="table table-bordered table-striped" >
+
+
+                                            <thead>
+                                                <tr>
+
+                                                    <th th colspan="5"><b> Triệu chứng Bệnh nhân</b></lable></th>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <th style="display:none">Code</th>
+                                                    <th style="width: 70%">Triệu chứng</th>
+                                                    <th >Trạng thái</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for tc1 in tc %}
+
+
+                                                <tr>
+
+                                                    <td style="display:none"><input type="text" class="form-control" name="codetc{{forloop.counter}}" value={{tc1.codetrieuchung}}></td>
+                                                    <td style="width: 70%"><input type="text" class="form-control" name="tcbn{{forloop.counter}}" value="{{tc1.trieuchung1}}" maxlength="2" ></td>
+                                                    <td>
+                                                    <div class="form-group">
+                                                    <select class="form-control" name="trangthai{{forloop.counter}}">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option>12</option>
+                                                    <option>13</option>
+
+                                                  </select>
+                                                    </div>
+                                                    </td>
+
+                                                </tr>
+                                                {% endfor %}
+
+
+
+                                            </tbody>
+                                        </table>
+                        <center><button type="button"  id="back4" style="background:powderblue; margin-top: 40px;padding:6px;" ><h6>Back Home<h6></button></center>
+                        </div>
+                        <br/>
+
+                </div>
+            <div class="panel panel-default" id="pandichvu" >
+                        <div class="panel-body" style="background:  linear-gradient(to top, #336699 15%, #ffffff 100%); max-height: 750px; height: 750px;">
+                                <table class="table table-hover table-dark"  id="bangdichvu">
+                                    <thead>
+                                        <tr>
+                                            <div class="row">
+                                            <div class="col8">
+                                                <th  class="text-left">Mô tả dịch vụ</th>
+                                            </div>
+                                            <div class="col4">
+                                                <th  class="text-left">Trạng thái</th>
+                                            </div>
+                                            </div>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <tr>
+                                            <div class="col-xs-8">
+                                            <td align="left">Dịch vụ A></td>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <td align="left">Đồng ý></td>
+                                            </div>
+
+
+                                        </tr>
+                                        <tr>
+                                            <div class="col-xs-8">
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" value="Dịch vụ B"></td>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <td align="left"><input type="button" readonly class="form-control" id="tt1" value="chờ bệnh nhận đồng ý"></td>
+                                            </div>
+
+
+                                        </tr>
+                                        <tr>
+                                                <div class="col-xs-8">
+                                            <td align="left"><input type="text" class="form-control" id="xl1" value="Dịch vụ C"></td>
+                                            </div>
+                                            <div class="col-xs-4">
+                                            <td align="left"><input type="button" readonly class="form-control" id="tt1" value="Đã có kết quả"></td>
+                                                    </div>
+
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                                <br/>
+
+
+
+
+
+                </div>
+                <br/>
+
+            </div>
+            <div class="panel panel-default" id="panchat" >
+                        <div class="panel-body" style="background-color: {{ pancolor }}; max-height: 750px; height: 750px;">
+
+                <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="Chat here"></td>
+                <br/>
+                <textarea class="form-control" rows="10" id="chat"></textarea>
+                <center><button type="button"  id="back8" style="background:powderblue; margin-top: 100px;padding:6px;" ><h6>Back Home<h6></button></center>
+
+                </div>
+
+            </div>
+            <div class="panel panel-default" id="pandonthuoc"  >
+                <div class="panel-body" style="background:  linear-gradient(to top, #336699 15%, #ffffff 100%); max-height: 750px; height: 750px;">
+
+                <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="table-wrapper-scroll-y">
+                                <table class="table table-hover table-dark">
+                                    <thead>
+
+                                        <th>Tên thuốc/Liều dùng/Số lượng/Đơn vị tính</th>
+
+                                    </thead>
+                                    <tbody>
+
+
+                                            <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="paracetamol"></td>
+
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="ngày uống 2 viên khi sốt trên 38 độ"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="2/vỉ"></td>
+                                            </tr>
+
+
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="Gatamicine"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="tiêm bắp 2 lần/ngày"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="10/ống"></td>
+
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="tên thuốc"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="liều dùng ngày 2 lần"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="1/vỉ"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="tên thuốc"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="liều dùng ngày 2 lần"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="1/vỉ"></td>
+
+
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="tên thuốc"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="liều dùng ngày 2 lần"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="1/vỉ"></td>
+
+
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="xl1" Placeholder="tên thuốc"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="liều dùng ngày 2 lần"></td>
+                                            </tr>
+                                            <tr>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" Placeholder="1/vỉ"></td>
+
+
+                                            </tr>
+
+
+                                    </tbody>
+                                </table>
+                                </div>
+                                <br/>
+                                    <input type="submit" value="Update"/>
+                            </form>
+                            <center><button type="button"  id="back7" style="background:powderblue; margin-top: 15px;padding:6px;" ><h6>Back Home<h6></button></center>
+                </div>
+                <br/>
+
+            </div>
+            <div class="panel panel-default" id="panxuly" >
+                <div class="panel-body" style="background:  linear-gradient(to bottom, #336699 15%, #ffffff 100%); max-height: 750px; height: 750px;">
+
+                <form action="" method="post">
+                            {% csrf_token %}
+
+                                <table class="table table-hover table-dark"  id="bangxuly">
+                                    <thead>
+                                        <tr>
+                                                <th  class="text-left">Mô tả</th>
+                                                <th  class="text-left">Trạng thái</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" value="Băng cầm máu"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" value="thực hiện"></td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" value="Cố định cột sống"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" value="yêu cầu"></td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" value="adrenalin tiêm tĩnh mạch bắp 1/lần"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" value="yêu cầu"></td>
+
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" value="adrenalin tiêm tĩnh mạch bắp 1/lần"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" value="yêu cầu"></td>
+
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" placeholder="thêm xử lý"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" placeholder="trạng thái"></td>
+
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" placeholder="thêm xử lý"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" placeholder="trạng thái"></td>
+
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td align="left"><input type="text" class="form-control" id="xl1" placeholder="thêm xử lý"></td>
+                                            <td align="left"><input type="text" class="form-control" id="tt1" placeholder="trạng thái"></td>
+
+
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                                    <input type="submit" value="Update"/>
+                            </form>
+                            <center><button type="button"  id="back5" style="background:powderblue; margin-top: 15px;padding:6px;" ><h6>Back Home<h6></button></center>
+
+                </div>
+                <br/>
+
+            </div>
+
+        </div>
+
+    <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "290px";
+            }
+
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+    </script>
+
+    <div id="id01" class="modal">
+      <form class="modal-content animate" action="/action_page.php">
+            <div class="imgcontainer">
+              <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+              <img src="{% static 'images/loginavatar.png' %}" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="form-group">
+                      <label for="uname"><b>Username</b></label>
+                      <input type="text" class="form-control" placeholder="Enter Username" name="uname" required>
+
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" class="form-control" placeholder="Enter Password" name="psw" required>
+
+                      <button type="submit">Login</button>
+                      <label>
+                        <input type="checkbox" class="form-control" checked="checked" name="remember"> Remember me
+                      </label>
+
+            </div>
+
+            <div class="form-group">
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+              <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+      </form>
+
+
+</div>
+
+
+
+
+
+    <script>
+            function Chapnhan() {
+              document.getElementById("tabhome").hide();
+
+            }
+    </script>
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+    <script>
+            function scrollFunction() {
+          if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
+            document.getElementById("myBtn").style.display = "block";
+          } else {
+            document.getElementById("myBtn").style.display = "none";
+          }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction1() {
+          window.open("http://doctorcityvn.pythonanywhere.com/test/","_self");
+        }
+    </script>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 16.397, lng: 105.644},
+          zoom: 14
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            var marker = new google.maps.Marker({
+              position: pos,
+              map: map,
+              title: 'Uluru (Ayers Rock)'
+            });
+            marker.addListener('click', function() {
+              infowindow.open(map, marker);
+            });
+
+            map.setCenter(pos);
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Bạn bật định vị lên để xem được bản đồ' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{map1}} &callback=initMap">
+    </script>
+
+</body>
+{% else %}
+<div class="row">
+    <div class="col-xs-6">
+        <div>
+            <div><br/><br/><br/><br/></script>
+                <center></script><a href="{% url 'login' %}" class="close" style="font-size: x-large; margin-top: 100px ">
+                <strong>You are not logged in!, Please login</strong> </a></center>
+                <br/>
+            </div>
+        <div><br/><br/></div>
+
+    </div>
+
+    <form action="{% url 'login' %}">
+
+        <center></script><button type="submit" class="btn btn-info" style="font-size: x-large; background-color: lightblue;">Go to Login</button></center>
+
+    </form>
+
+</div>
+{% endif %}
+
+{% endblock %}
+
+</html>
+

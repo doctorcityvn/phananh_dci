@@ -1,0 +1,235 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<html lang="en">
+
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/onsite.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <script src="/js/ham.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <style type="text/css">
+    .txtdeepshadow {
+  text-align: center;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-size: 22px;
+  height: 50px;
+  padding-top: 7px;
+  color: #FFD700;
+  background-color: #87CEFA;
+  letter-spacing: .1em;
+  text-shadow: 0 -1px 0 #fff, 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424, 0 7px 0 #222, 0 8px 0 #202020, 0 9px 0 #1e1e1e, 0 10px 0 #1c1c1c, 0 11px 0 #1a1a1a, 0 7px 0 #181818, 0 7px 0 #161616, 0 7px 0 #141414, 0 7px 0 #121212, 0 8px 15px rgba(0, 0, 0, 0.9);
+}
+    </style>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 350px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+
+    <title>Document</title>
+</head>
+<body>
+     <div id="mySidenav" class="sidenav">
+       <button href="javascript:void(0)" class="closebtn" style="pading: 8px;" onclick="closeNav()" font>&times; Close</button>
+
+       <a class="navbar-brand" href="#">
+           <center>
+          <img src="{% static 'images/loginavatar.png' %}" style="max-height:80px">
+          </center>
+
+        </a>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <hr class="style2">
+
+
+      <a href="http://doctorcityvn.pythonanywhere.com/menu/">
+    <span class="glyphicon glyphicon-home"></span> Home
+  </a>
+      <a href="http://doctorcityvn.pythonanywhere.com/about/"><img src="{% static 'images/about.jpg' %}" class="img-fluid" alt="Responsive image" style="max-height:20px"> About</a>
+      <a href="#"><img src="{% static 'images/service.png' %}" class="img-fluid" alt="Responsive image" style="max-height:20px"> Services</a>
+      <a href="http://doctorcityvn.pythonanywhere.com/all/BN1/#"><img src="{% static 'images/benhnhan.jpg' %}" class="img-fluid" alt="Responsive image" style="max-height:20px"> Lịch sử khám bệnh</a>
+      <a href="http://doctorcityvn.pythonanywhere.com/staff/"><img src="{% static 'images/datacenter.png' %}" class="img-fluid" alt="Responsive image" style="max-height:20px"> Thanh toán</a>
+      <a href="http://doctorcityvn.pythonanywhere.com/onsite/"><img src="{% static 'images/doctorathome.png' %}" class="img-fluid" alt="Responsive image" style="max-height:20px"> Thông báo từ trung tâm</a>
+
+
+     <hr class="style2">
+      <a href="{% url 'logout' %}" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+
+    </div>
+
+
+
+        <div class="container">
+        <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; </span>
+        <center><img src="{% static 'images/logo.png' %}" alt="ảnh logo" class="responsive-img" style="max-height:80px"></center>
+        </script><a class="btn btn-primary ml-auto" href="tel:0084979890268" style="margin-left: 5px; padding:4px;background-color:rgb(255, 92, 51);position: absolute; right: 0;">
+                            <b></script>Call emergency </b></script><span class="glyphicon glyphicon-earphone" style="padding-left:1px; padding-right:1px;"></span>
+                        </a>
+        <div  class="row" style="margin-top: 25px;>
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-8 col-sm-offset-1">
+                    <center><h1  class="txtdeepshadow" >Trung tâm hỗ trợ bác sỹ</h1></center>
+
+                </div>
+
+        </div>
+        <div  class="row">
+              <br/>
+              <br/>
+            <div class="col-sm-3">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Phòng Khám
+                    <span class="caret"></span></button>
+                    <br/>
+                    <ol class="dropdown-menu">
+                        {% if namediv_list %}
+
+
+                                {% for name1 in namediv_list %}
+                                <li><a href="{{name1.id}}/">{{name1}} </a></li>
+
+                                {% endfor %}
+
+                            {% else %}
+                            <p>No Div are available.</p>
+                         {% endif %}
+
+
+                            <li class="divider"></li>
+                            <li><a href="http://doctorcityvn.pythonanywhere.com">All Div</a></li>
+                     </ol>
+                </div>
+                <br/>
+                <div class="searchbar">
+                    <form action="" method="post">
+                    {% csrf_token %}
+                        <input class="search_input" type="text" name="searchname" placeholder="Search tên bệnh nhân" align="center">
+                        <input type="submit" value="Search"/>
+                    </form>
+                </div>
+                <br/>
+                 <h5 style="text-shadow: 4px 4px 2px #87cefa"><b>Danh sách bệnh nhân:</b></h5>
+                <div class="table-wrapper-scroll-y">
+
+                    <table class="table table-bordered table-striped">
+
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Code</th>
+                        <th>Họ tên</th>
+                        <th>Tuổi</th>
+                    </tr>
+                    </thead>
+                    <tbody height:50px; overflow-y:auto; width: 100%;>
+                     {% if person2 %}
+
+
+                                {% for name2 in person2 %}
+
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{name2.codepatientp}} </td>
+                        <td><a href="all/{{name2.codepatientp}}">{{name2}} </a></td>
+                        <td>{{name2.age}} tuổi</a></td>
+                    </tr>
+                      {% endfor %}
+
+                       {% endif %}
+
+
+                    </tbody>
+                    </table>
+                </div>
+
+
+                <br/>
+                <br/>
+            </div>
+
+           <div class="col-sm-6">
+                <div>
+               <div id="map" style="border-style: solid;"></div>
+
+               </div>
+            </div>
+        </div>
+        <script>
+            function openNav() {
+              document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+              document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
+        <script>
+        function initMap() {
+          // The location of Uluru
+          var uluru = {lat: 21.04, lng: 105.7};
+          // The map, centered at Uluru
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 8, center: uluru});
+          // The marker, positioned at Uluru
+          var marker = new google.maps.Marker({position: uluru, map: map});
+        }
+        </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5wAflNNOYGLM4FiA9HWXZvYcPiyGi2sw&callback=initMap">
+    </script>
+    </div>
+
+
+
+</body>
+
+{% else %}
+<div class="row">
+    <div class="col-xs-6">
+        <div>
+            <div><br/><br/><br/><br/></script>
+                <center></script><a href="http://doctorcityvn.pythonanywhere.com/login1/" class="close" style="font-size: x-large; margin-top: 100px ">
+                <strong>You are not logged in!, Please login</strong> </a></center>
+                <br/>
+            </div>
+        <div><br/><br/></div>
+
+    </div>
+
+    <form action="http://doctorcityvn.pythonanywhere.com/login1/">
+
+        <center></script><button type="submit" class="btn btn-info" style="font-size: x-large; background-color: lightblue;">Go to Login</button></center>
+
+    </form>
+
+</div>
+{% endif %}
+
+{% endblock %}
+</html>
+
